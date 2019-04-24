@@ -8,18 +8,27 @@ pipeline {
     options {
         skipStagesAfterUnstable()
     }
+    environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
+    }
     stages {
         stage('Build') { 
             steps {
                 sh 'mvn -B -DskipTests clean package'
 		sh 'mvn clean install'
 		sh 'echo Build... Build...'
+                sh '''
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                '''
             }
         }
         stage('Test') {
             steps {
                 sh 'mvn test'
 		sh 'echo Test... Test...'
+		sh 'printenv'
             }
             post {
                 always {
