@@ -12,6 +12,7 @@ pipeline {
         DISABLE_AUTH = 'true'
         DB_ENGINE    = 'sqlite'
 	VAR123       = 'dummy'
+	VAR456 	     = 'var456'
     }
     stages {
         stage('Build') { 
